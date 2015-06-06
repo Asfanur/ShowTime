@@ -16,6 +16,7 @@
 		3A2D5D3D1B218CC600B9E7B7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A2D5D3B1B218CC600B9E7B7 /* LaunchScreen.xib */; };
 		3A2D5D491B218CC600B9E7B7 /* ShowTimeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D5D481B218CC600B9E7B7 /* ShowTimeTests.m */; };
 		3A2D5D561B21901500B9E7B7 /* ShowTimeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D5D551B21901500B9E7B7 /* ShowTimeTableViewController.m */; };
+		3AA2CFCB1B22CBFD00A1976C /* ShowData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA2CFCA1B22CBFD00A1976C /* ShowData.m */; };
 		3AB60DAE1B21C45F00BA45A3 /* ConstantCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB60DAD1B21C45F00BA45A3 /* ConstantCollection.m */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,8 @@
 		3A2D5D481B218CC600B9E7B7 /* ShowTimeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowTimeTests.m; sourceTree = "<group>"; };
 		3A2D5D541B21901500B9E7B7 /* ShowTimeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowTimeTableViewController.h; sourceTree = "<group>"; };
 		3A2D5D551B21901500B9E7B7 /* ShowTimeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowTimeTableViewController.m; sourceTree = "<group>"; };
+		3AA2CFC91B22CBFD00A1976C /* ShowData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowData.h; sourceTree = "<group>"; };
+		3AA2CFCA1B22CBFD00A1976C /* ShowData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowData.m; sourceTree = "<group>"; };
 		3AB60DAC1B21C45F00BA45A3 /* ConstantCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantCollection.h; sourceTree = "<group>"; };
 		3AB60DAD1B21C45F00BA45A3 /* ConstantCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantCollection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +148,8 @@
 		3AB60DAA1B21C35A00BA45A3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3AA2CFC91B22CBFD00A1976C /* ShowData.h */,
+				3AA2CFCA1B22CBFD00A1976C /* ShowData.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -264,6 +269,7 @@
 			files = (
 				3A2D5D2F1B218CC600B9E7B7 /* AppDelegate.m in Sources */,
 				3A2D5D2C1B218CC600B9E7B7 /* main.m in Sources */,
+				3AA2CFCB1B22CBFD00A1976C /* ShowData.m in Sources */,
 				3A2D5D561B21901500B9E7B7 /* ShowTimeTableViewController.m in Sources */,
 				3A27F7FC1B226E2700168812 /* NetworkModelDownloader.m in Sources */,
 				3AB60DAE1B21C45F00BA45A3 /* ConstantCollection.m in Sources */,
