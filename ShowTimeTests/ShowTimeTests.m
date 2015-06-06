@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "NetworkModelDownloader.h"
 
 @interface ShowTimeTests : XCTestCase
 
@@ -25,10 +26,22 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+-(void)testNetworkModelDownloader {
+    
+    XCTestExpectation *completionExpectation = [self expectationWithDescription:@"Network Model Downloader"];
+    [NetworkModelDownloader fetchShowInfoOfOffset:@0 WithCompletionBlock:^(NSDictionary *model, NSError *error) {
+        
+        XCTAssertNotNil(model, @"data should not be nil");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertEqual([model[kHashCount] intValue],28, @"Wrong Count");
+        [completionExpectation fulfill];
+        
+    }];
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+    
+    
 }
+
 
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
