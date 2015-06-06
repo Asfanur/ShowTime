@@ -13,10 +13,9 @@
 #import "BlurredBackgroundView.h"
 
 @interface ShowTimeTableViewController () {
- int page;
+    int page;
 }
 @property (nonatomic,strong) NSMutableArray *modelData;
-@property (nonatomic,strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic) BOOL isRefreshing;
 
 @end
@@ -32,10 +31,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    BlurredBackgroundView *blurredBackgroundView = [[BlurredBackgroundView alloc] initWithFrame:CGRectZero];
-    self.tableView.backgroundView = blurredBackgroundView;
-     self.tableView.separatorEffect = [UIVibrancyEffect  effectForBlurEffect:(UIBlurEffect *)blurredBackgroundView.blurView.effect];
-
+    [self setBlurredBackground];
+    
     [self downloadShowsWithOffset:@0];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didChangePreferredContentSize:)
@@ -43,7 +40,7 @@
     self.tableView.estimatedRowHeight = 100.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
-   
+    
     
     
 }
@@ -54,59 +51,39 @@
                                                   object:nil];
 }
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
 }
--(void)startActivityIndicator {
-    self.activityIndicator =  [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.activityIndicator.frame = CGRectMake(self.tableView.center.x, self.tableView.center.y, 100, 100);
-    [self.tableView addSubview:self.activityIndicator];
-    self.activityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [self.tableView addConstraint:[NSLayoutConstraint
-                                   constraintWithItem:self.activityIndicator
-                                   attribute:NSLayoutAttributeCenterY
-                                   relatedBy:NSLayoutRelationEqual
-                                   toItem:self.tableView
-                                   attribute:NSLayoutAttributeCenterY
-                                   multiplier:1.0
-                                   constant:0.0]];
-    
-    [self.tableView addConstraint:[NSLayoutConstraint
-                                   constraintWithItem:self.activityIndicator
-                                   attribute:NSLayoutAttributeCenterX
-                                   relatedBy:NSLayoutRelationEqual
-                                   toItem:self.tableView
-                                   attribute:NSLayoutAttributeCenterX
-                                   multiplier:1.0
-                                   constant:0.0]];
-    [self.activityIndicator startAnimating];
-    
-    
-    
-    
-}
 
--(void)stopActivityIndicator {
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator removeFromSuperview];
+
+
+
+// -------------------------------------------------------------------------------
+//	setBlurredBackground
+//  sets tableview background with BlurredBackgroundView
+// -------------------------------------------------------------------------------
+-(void)setBlurredBackground {
+    
+    BlurredBackgroundView *blurredBackgroundView = [[BlurredBackgroundView alloc] initWithFrame:CGRectZero];
+    self.tableView.backgroundView = blurredBackgroundView;
+    self.tableView.separatorEffect = [UIVibrancyEffect  effectForBlurEffect:(UIBlurEffect *)blurredBackgroundView.blurView.effect];
     
     
 }
 
 
+// -------------------------------------------------------------------------------
+//	downloadShowsWithOffset:offset
+//  Download shows information with offset specified
+// -------------------------------------------------------------------------------
 
 -(void)downloadShowsWithOffset:(NSNumber *)offset {
     
-    [self startActivityIndicator];
     [NetworkModelDownloader fetchShowInfoOfOffset:offset
                               WithCompletionBlock:^(NSDictionary *model, NSError *error) {
+                                 
                                   self.isRefreshing = NO;
-                                  
-                                  [self stopActivityIndicator];
                                   
                                   if (error) {
                                       page--;
@@ -133,7 +110,7 @@
                                   } else {
                                       
                                       NSMutableArray *records = [NSMutableArray array];
-                                      
+                                      //Saving Shows data and reload the tableview
                                       for (NSDictionary *row in model[kResults]) {
                                           ShowData *showData = [[ShowData alloc] initWithName:row[kName]
                                                                                 withStartTime:row[kStartTime]
@@ -155,6 +132,11 @@
 }
 
 
+// -------------------------------------------------------------------------------
+//	didChangePreferredContentSize:notification
+//  Self sizing cell
+// -------------------------------------------------------------------------------
+
 - (void)didChangePreferredContentSize:(NSNotification *)notification
 {
     [self.tableView reloadData];
@@ -173,8 +155,6 @@
     ShowTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     ShowData *showData = self.modelData[indexPath.row];
     
-    
-    
     cell.backgroundColor = [UIColor clearColor];
     cell.name.textColor = [UIColor whiteColor];
     cell.startTime.textColor = [UIColor whiteColor];
@@ -187,9 +167,11 @@
     cell.endTime.text  = showData.endTime;
     cell.channel.text = showData.channel;
     cell.rating.text = showData.rating;
+    
     return cell;
 }
 
+#pragma mark - scrollView delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -198,7 +180,7 @@
         if(self.isRefreshing == NO){
             self.isRefreshing = YES;
             [self downloadShowsWithOffset:[NSNumber numberWithInt:page++]];
-             NSLog(@"called %d",page);
+            
         }
     }
 }

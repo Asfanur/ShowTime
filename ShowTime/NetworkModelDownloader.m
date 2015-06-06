@@ -30,9 +30,7 @@ typedef void (^DownloadCompletionBlock) (NSData *data, NSURLResponse *response, 
         }
         //Parse the json data and return the callback 
         else {
-           // NSString *string = [[[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding] autorelease]  ;
-            //NSData *metOfficeData = [string dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *mainDictionary = [NSJSONSerialization JSONObjectWithData:data
+             NSDictionary *mainDictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                         options:kNilOptions
                                                                           error:&error];
             completionBlock(mainDictionary,error);

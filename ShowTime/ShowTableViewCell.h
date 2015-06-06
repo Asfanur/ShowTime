@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+//This class displays showtime data
+
 @interface ShowTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *startTime;
 @property (weak, nonatomic) IBOutlet UILabel *endTime;

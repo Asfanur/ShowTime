@@ -8,13 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ShowData : NSObject
 
-//"name": "The Cleveland Show",
-//"start_time": "9:30pm",
-//"end_time": "10:00pm",
-//"channel": "ELEVEN",
-//"rating": "M"
+//This class represents showtime data 
+@interface ShowData : NSObject
 
 @property (nonatomic,readonly) NSString *name;
 @property (nonatomic,readonly) NSString *startTime;

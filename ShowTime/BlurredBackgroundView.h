@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+//This class Creates  a blurred background 
 @interface BlurredBackgroundView : UIView
 @property (strong,nonatomic) UIVisualEffectView *blurView;
 

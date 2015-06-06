@@ -7,11 +7,18 @@
 //
 
 #import "BlurredBackgroundView.h"
+
 @interface BlurredBackgroundView()
 @property (strong,nonatomic) UIImageView *imageView;
 @end
 
 @implementation BlurredBackgroundView
+
+// -------------------------------------------------------------------------------
+//	initWithFrame:frame
+//  Intialize with blurred image 
+// -------------------------------------------------------------------------------
+
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
