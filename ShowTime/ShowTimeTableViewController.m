@@ -10,6 +10,7 @@
 #import "NetworkModelDownloader.h"
 #import "ShowData.h"
 #import "ShowTableViewCell.h"
+#import "BlurredBackgroundView.h"
 
 @interface ShowTimeTableViewController () {
  int page;
@@ -31,13 +32,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    BlurredBackgroundView *blurredBackgroundView = [[BlurredBackgroundView alloc] initWithFrame:CGRectZero];
+    self.tableView.backgroundView = blurredBackgroundView;
+     self.tableView.separatorEffect = [UIVibrancyEffect  effectForBlurEffect:(UIBlurEffect *)blurredBackgroundView.blurView.effect];
+
     [self downloadShowsWithOffset:@0];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didChangePreferredContentSize:)
                                                  name:UIContentSizeCategoryDidChangeNotification object:nil];
     self.tableView.estimatedRowHeight = 100.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-
+    
+   
     
     
 }
@@ -166,6 +172,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ShowTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     ShowData *showData = self.modelData[indexPath.row];
+    
+    
+    
+    cell.backgroundColor = [UIColor clearColor];
+    cell.name.textColor = [UIColor whiteColor];
+    cell.startTime.textColor = [UIColor whiteColor];
+    cell.endTime.textColor  = [UIColor whiteColor];
+    cell.channel.textColor = [UIColor whiteColor];
+    cell.rating.textColor = [UIColor whiteColor];
+    
     cell.name.text = showData.name;
     cell.startTime.text = showData.startTime;
     cell.endTime.text  = showData.endTime;
