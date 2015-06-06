@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A27F7FC1B226E2700168812 /* NetworkModelDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A27F7FB1B226E2700168812 /* NetworkModelDownloader.m */; };
+		3A27F7FD1B22740000168812 /* NetworkModelDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A27F7FB1B226E2700168812 /* NetworkModelDownloader.m */; };
 		3A2D5D2C1B218CC600B9E7B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D5D2B1B218CC600B9E7B7 /* main.m */; };
 		3A2D5D2F1B218CC600B9E7B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D5D2E1B218CC600B9E7B7 /* AppDelegate.m */; };
-		3A2D5D321B218CC600B9E7B7 /* ShowTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D5D301B218CC600B9E7B7 /* ShowTime.xcdatamodeld */; };
-		3A2D5D351B218CC600B9E7B7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D5D341B218CC600B9E7B7 /* ViewController.m */; };
 		3A2D5D381B218CC600B9E7B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A2D5D361B218CC600B9E7B7 /* Main.storyboard */; };
 		3A2D5D3A1B218CC600B9E7B7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A2D5D391B218CC600B9E7B7 /* Images.xcassets */; };
 		3A2D5D3D1B218CC600B9E7B7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A2D5D3B1B218CC600B9E7B7 /* LaunchScreen.xib */; };
 		3A2D5D491B218CC600B9E7B7 /* ShowTimeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D5D481B218CC600B9E7B7 /* ShowTimeTests.m */; };
+		3A2D5D561B21901500B9E7B7 /* ShowTimeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D5D551B21901500B9E7B7 /* ShowTimeTableViewController.m */; };
+		3AB60DAE1B21C45F00BA45A3 /* ConstantCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB60DAD1B21C45F00BA45A3 /* ConstantCollection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,20 +30,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A27F7FA1B226E2700168812 /* NetworkModelDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkModelDownloader.h; sourceTree = "<group>"; };
+		3A27F7FB1B226E2700168812 /* NetworkModelDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkModelDownloader.m; sourceTree = "<group>"; };
 		3A2D5D261B218CC600B9E7B7 /* ShowTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShowTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2D5D2A1B218CC600B9E7B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A2D5D2B1B218CC600B9E7B7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A2D5D2D1B218CC600B9E7B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3A2D5D2E1B218CC600B9E7B7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3A2D5D311B218CC600B9E7B7 /* ShowTime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShowTime.xcdatamodel; sourceTree = "<group>"; };
-		3A2D5D331B218CC600B9E7B7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3A2D5D341B218CC600B9E7B7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3A2D5D371B218CC600B9E7B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A2D5D391B218CC600B9E7B7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3A2D5D3C1B218CC600B9E7B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3A2D5D421B218CC600B9E7B7 /* ShowTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShowTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2D5D471B218CC600B9E7B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A2D5D481B218CC600B9E7B7 /* ShowTimeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowTimeTests.m; sourceTree = "<group>"; };
+		3A2D5D541B21901500B9E7B7 /* ShowTimeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowTimeTableViewController.h; sourceTree = "<group>"; };
+		3A2D5D551B21901500B9E7B7 /* ShowTimeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowTimeTableViewController.m; sourceTree = "<group>"; };
+		3AB60DAC1B21C45F00BA45A3 /* ConstantCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantCollection.h; sourceTree = "<group>"; };
+		3AB60DAD1B21C45F00BA45A3 /* ConstantCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantCollection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,14 +88,11 @@
 		3A2D5D281B218CC600B9E7B7 /* ShowTime */ = {
 			isa = PBXGroup;
 			children = (
-				3A2D5D2D1B218CC600B9E7B7 /* AppDelegate.h */,
-				3A2D5D2E1B218CC600B9E7B7 /* AppDelegate.m */,
-				3A2D5D331B218CC600B9E7B7 /* ViewController.h */,
-				3A2D5D341B218CC600B9E7B7 /* ViewController.m */,
-				3A2D5D361B218CC600B9E7B7 /* Main.storyboard */,
+				3AB60DAB1B21C38E00BA45A3 /* Helper */,
+				3AB60DAA1B21C35A00BA45A3 /* Model */,
+				3A2D5D531B218E6300B9E7B7 /* Controller */,
+				3A2D5D521B218E0F00B9E7B7 /* View */,
 				3A2D5D391B218CC600B9E7B7 /* Images.xcassets */,
-				3A2D5D3B1B218CC600B9E7B7 /* LaunchScreen.xib */,
-				3A2D5D301B218CC600B9E7B7 /* ShowTime.xcdatamodeld */,
 				3A2D5D291B218CC600B9E7B7 /* Supporting Files */,
 			);
 			path = ShowTime;
@@ -120,6 +122,44 @@
 				3A2D5D471B218CC600B9E7B7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3A2D5D521B218E0F00B9E7B7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3A2D5D361B218CC600B9E7B7 /* Main.storyboard */,
+				3A2D5D3B1B218CC600B9E7B7 /* LaunchScreen.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		3A2D5D531B218E6300B9E7B7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3A2D5D541B21901500B9E7B7 /* ShowTimeTableViewController.h */,
+				3A2D5D551B21901500B9E7B7 /* ShowTimeTableViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		3AB60DAA1B21C35A00BA45A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		3AB60DAB1B21C38E00BA45A3 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				3A2D5D2D1B218CC600B9E7B7 /* AppDelegate.h */,
+				3A2D5D2E1B218CC600B9E7B7 /* AppDelegate.m */,
+				3AB60DAC1B21C45F00BA45A3 /* ConstantCollection.h */,
+				3AB60DAD1B21C45F00BA45A3 /* ConstantCollection.m */,
+				3A27F7FA1B226E2700168812 /* NetworkModelDownloader.h */,
+				3A27F7FB1B226E2700168812 /* NetworkModelDownloader.m */,
+			);
+			name = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,9 +263,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A2D5D2F1B218CC600B9E7B7 /* AppDelegate.m in Sources */,
-				3A2D5D321B218CC600B9E7B7 /* ShowTime.xcdatamodeld in Sources */,
-				3A2D5D351B218CC600B9E7B7 /* ViewController.m in Sources */,
 				3A2D5D2C1B218CC600B9E7B7 /* main.m in Sources */,
+				3A2D5D561B21901500B9E7B7 /* ShowTimeTableViewController.m in Sources */,
+				3A27F7FC1B226E2700168812 /* NetworkModelDownloader.m in Sources */,
+				3AB60DAE1B21C45F00BA45A3 /* ConstantCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A2D5D491B218CC600B9E7B7 /* ShowTimeTests.m in Sources */,
+				3A27F7FD1B22740000168812 /* NetworkModelDownloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +464,7 @@
 				3A2D5D4E1B218CC600B9E7B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3A2D5D4F1B218CC600B9E7B7 /* Build configuration list for PBXNativeTarget "ShowTimeTests" */ = {
 			isa = XCConfigurationList;
@@ -430,21 +473,9 @@
 				3A2D5D511B218CC600B9E7B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		3A2D5D301B218CC600B9E7B7 /* ShowTime.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				3A2D5D311B218CC600B9E7B7 /* ShowTime.xcdatamodel */,
-			);
-			currentVersion = 3A2D5D311B218CC600B9E7B7 /* ShowTime.xcdatamodel */;
-			path = ShowTime.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 3A2D5D1E1B218CC600B9E7B7 /* Project object */;
 }
