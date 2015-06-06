@@ -7,78 +7,149 @@
 //
 
 #import "ShowTimeTableViewController.h"
+#import "NetworkModelDownloader.h"
+#import "ShowData.h"
 
 @interface ShowTimeTableViewController ()
-
+@property (nonatomic,strong) NSMutableArray *modelData;
+@property (nonatomic,strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic,strong) NSNumber *page;
+@property (nonatomic) BOOL isRefreshing;
 @end
 
 @implementation ShowTimeTableViewController
 
+-(NSMutableArray *)modelData {
+    if (!_modelData) {
+        _modelData = [[NSMutableArray alloc] init];
+    }
+    return _modelData;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    [self downloadShowsWithOffset:@0];
+    
+    
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
 }
+-(void)startActivityIndicator {
+    self.activityIndicator =  [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator.frame = CGRectMake(self.tableView.center.x, self.tableView.center.y, 100, 100);
+    [self.tableView addSubview:self.activityIndicator];
+    self.activityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self.tableView addConstraint:[NSLayoutConstraint
+                                   constraintWithItem:self.activityIndicator
+                                   attribute:NSLayoutAttributeCenterY
+                                   relatedBy:NSLayoutRelationEqual
+                                   toItem:self.tableView
+                                   attribute:NSLayoutAttributeCenterY
+                                   multiplier:1.0
+                                   constant:0.0]];
+    
+    [self.tableView addConstraint:[NSLayoutConstraint
+                                   constraintWithItem:self.activityIndicator
+                                   attribute:NSLayoutAttributeCenterX
+                                   relatedBy:NSLayoutRelationEqual
+                                   toItem:self.tableView
+                                   attribute:NSLayoutAttributeCenterX
+                                   multiplier:1.0
+                                   constant:0.0]];
+    [self.activityIndicator startAnimating];
+    
+    
+    
+    
+}
+
+-(void)stopActivityIndicator {
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator removeFromSuperview];
+    
+    
+}
+
+
+
+-(void)downloadShowsWithOffset:(NSNumber *)offset {
+    
+    [self startActivityIndicator];
+    [NetworkModelDownloader fetchShowInfoOfOffset:offset
+                              WithCompletionBlock:^(NSDictionary *model, NSError *error) {
+                                  
+                                  [self stopActivityIndicator];
+                                  
+                                  if (error) {
+                                      
+                                      UIAlertController * alert=   [UIAlertController
+                                                                    alertControllerWithTitle:@"Error"
+                                                                    message:error.localizedDescription
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+                                      
+                                      UIAlertAction* ok = [UIAlertAction
+                                                           actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction * action)
+                                                           {
+                                                               [alert dismissViewControllerAnimated:YES completion:nil];
+                                                               
+                                                           }];
+                                      
+                                      [alert addAction:ok];
+                                      
+                                      [self presentViewController:alert animated:YES completion:nil];
+                                      
+                                      
+                                      
+                                  } else {
+                                      
+                                      NSMutableArray *records = [NSMutableArray array];
+                                      NSLog(@"%@",model);
+                                      
+                                      for (NSDictionary *row in model[kResults]) {
+                                          ShowData *showData = [[ShowData alloc] initWithName:row[kName]
+                                                                                withStartTime:row[kStartTime]
+                                                                                  withEndTime:row[kEndTime]
+                                                                                  withChannel:row[kChannel]
+                                                                                   withRating:row[kRating]];
+                                          
+                                          [records addObject:showData];
+                                      }
+                                      [self.modelData addObjectsFromArray:records];
+                                      
+                                      [self.tableView reloadData];
+                                      
+                                  }
+                                  
+                                  
+                                  
+                              }];
+}
+
+
 
 #pragma mark - Table view data source
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.modelData.count;
+}
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    ShowData *showData = self.modelData[indexPath.row];
+    cell.textLabel.text = showData.name;
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
