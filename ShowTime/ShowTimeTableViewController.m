@@ -10,11 +10,13 @@
 #import "NetworkModelDownloader.h"
 #import "ShowData.h"
 
-@interface ShowTimeTableViewController ()
+@interface ShowTimeTableViewController () {
+ int page;
+}
 @property (nonatomic,strong) NSMutableArray *modelData;
 @property (nonatomic,strong) UIActivityIndicatorView *activityIndicator;
-@property (nonatomic,strong) NSNumber *page;
 @property (nonatomic) BOOL isRefreshing;
+
 @end
 
 @implementation ShowTimeTableViewController
@@ -83,11 +85,12 @@
     [self startActivityIndicator];
     [NetworkModelDownloader fetchShowInfoOfOffset:offset
                               WithCompletionBlock:^(NSDictionary *model, NSError *error) {
+                                  self.isRefreshing = NO;
                                   
                                   [self stopActivityIndicator];
                                   
                                   if (error) {
-                                      
+                                      page--;
                                       UIAlertController * alert=   [UIAlertController
                                                                     alertControllerWithTitle:@"Error"
                                                                     message:error.localizedDescription
@@ -111,7 +114,6 @@
                                   } else {
                                       
                                       NSMutableArray *records = [NSMutableArray array];
-                                      NSLog(@"%@",model);
                                       
                                       for (NSDictionary *row in model[kResults]) {
                                           ShowData *showData = [[ShowData alloc] initWithName:row[kName]
@@ -149,6 +151,20 @@
     
     return cell;
 }
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height))
+    {
+        if(self.isRefreshing == NO){
+            self.isRefreshing = YES;
+            [self downloadShowsWithOffset:[NSNumber numberWithInt:page++]];
+             NSLog(@"called %d",page);
+        }
+    }
+}
+
 
 
 
