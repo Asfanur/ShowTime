@@ -9,6 +9,7 @@
 #import "ShowTimeTableViewController.h"
 #import "NetworkModelDownloader.h"
 #import "ShowData.h"
+#import "ShowTableViewCell.h"
 
 @interface ShowTimeTableViewController () {
  int page;
@@ -31,8 +32,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self downloadShowsWithOffset:@0];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didChangePreferredContentSize:)
+                                                 name:UIContentSizeCategoryDidChangeNotification object:nil];
+    self.tableView.estimatedRowHeight = 100.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+
     
     
+}
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIContentSizeCategoryDidChangeNotification
+                                                  object:nil];
 }
 
 
@@ -136,6 +149,12 @@
 }
 
 
+- (void)didChangePreferredContentSize:(NSNotification *)notification
+{
+    [self.tableView reloadData];
+}
+
+
 
 #pragma mark - Table view data source
 
@@ -145,10 +164,13 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    ShowTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     ShowData *showData = self.modelData[indexPath.row];
-    cell.textLabel.text = showData.name;
-    
+    cell.name.text = showData.name;
+    cell.startTime.text = showData.startTime;
+    cell.endTime.text  = showData.endTime;
+    cell.channel.text = showData.channel;
+    cell.rating.text = showData.rating;
     return cell;
 }
 
@@ -164,6 +186,7 @@
         }
     }
 }
+
 
 
 
