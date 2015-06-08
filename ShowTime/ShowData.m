@@ -21,6 +21,12 @@
 
 @implementation ShowData
 
+// -------------------------------------------------------------------------------
+//	init
+//  Initialize the class with required data 
+// -------------------------------------------------------------------------------
+
+
 -(instancetype)initWithName:(NSString *)name withStartTime:(NSString *)startTime withEndTime:(NSString *)endTime withChannel:(NSString *)channel withRating:(NSString *)rating {
     
     self = [super init];

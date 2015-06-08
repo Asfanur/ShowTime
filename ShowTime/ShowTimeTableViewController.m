@@ -13,9 +13,12 @@
 #import "BlurredBackgroundView.h"
 
 @interface ShowTimeTableViewController () {
+    // Tracks current offset
     int page;
 }
+// Data that is shown in tableView
 @property (nonatomic,strong) NSMutableArray *modelData;
+// Checks if tableView is currently refreshing or not
 @property (nonatomic) BOOL isRefreshing;
 
 @end
@@ -32,8 +35,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBlurredBackground];
-    
     [self downloadShowsWithOffset:@0];
+    
+    // UIContentSizeCategoryDidChangeNotification for self sizing cell
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didChangePreferredContentSize:)
                                                  name:UIContentSizeCategoryDidChangeNotification object:nil];
@@ -44,8 +48,10 @@
     
     
 }
+
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    // Remove notification
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIContentSizeCategoryDidChangeNotification
                                                   object:nil];
@@ -82,10 +88,11 @@
     
     [NetworkModelDownloader fetchShowInfoOfOffset:offset
                               WithCompletionBlock:^(NSDictionary *model, NSError *error) {
-                                 
+                                 // Sets isRefreshing to NO to allow refreshing again
                                   self.isRefreshing = NO;
                                   
                                   if (error) {
+                                      // Data loading failed so revert back to previous offset
                                       page--;
                                       UIAlertController * alert=   [UIAlertController
                                                                     alertControllerWithTitle:@"Error"
@@ -154,7 +161,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ShowTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     ShowData *showData = self.modelData[indexPath.row];
-    
+    // Set label text color
     cell.backgroundColor = [UIColor clearColor];
     cell.name.textColor = [UIColor whiteColor];
     cell.startTime.textColor = [UIColor whiteColor];
@@ -172,6 +179,12 @@
 }
 
 #pragma mark - scrollView delegate
+
+// -------------------------------------------------------------------------------
+//	scrollViewDidScroll:scrollView
+//  Download next offset data 
+// -------------------------------------------------------------------------------
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
