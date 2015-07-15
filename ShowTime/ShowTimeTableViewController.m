@@ -130,8 +130,7 @@
                                       [self.modelData addObjectsFromArray:records];
                                       
                                       [self.tableView reloadData];
-                                      
-                                  }
+                                   }
                                   
                                   
                                   
@@ -185,9 +184,8 @@
 //  Download next offset data 
 // -------------------------------------------------------------------------------
 
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
     if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height))
     {
         if(self.isRefreshing == NO){
@@ -196,7 +194,9 @@
             
         }
     }
+   
 }
+ 
 
 
 
